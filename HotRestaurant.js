@@ -14,7 +14,7 @@ var numberofTables = 5
 var reservationList = [
   {
     name: "Test",
-    Phone Number: "123-456-7890",
+    phoneNumber: "123-456-7890",
     email: "test@test.com",
     uniqueID: "ABC123"
   }
@@ -23,7 +23,7 @@ var reservationList = [
 var waitList = [
   {
     name: "Test",
-    Phone Number: "123-456-7890",
+    phoneNumber: "123-456-7890",
     email: "test@test.com",
     uniqueID: "ABC123"
   }
