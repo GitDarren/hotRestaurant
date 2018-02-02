@@ -11,6 +11,9 @@ var PORT = process.env.PORT || 3000
 
 var numberofTables = 5
 
+var reserveSuccess = JSON.stringify('Reservation')
+var reserveFailure = JSON.stringify('Waitlist')
+
 var reservationList = [
   {
     name: 'Test',
@@ -31,8 +34,6 @@ var waitList = [
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-console.log(app)
 
 // Routes
 // =============================================================
@@ -58,38 +59,41 @@ app.get('/api/waitlist', function (req, res) {
   res.json(waitList)
 })
 
-// // Search for Specific Character (or all characters) - provides JSON
-// app.get("/api/:characters?", function (req, res) {
-//   var chosen = req.params.characters;
+app.post("/api/new", function (req, res) {
+  var newReservation = req.body;
 
-//   if (chosen) {
-//     console.log(chosen);
+  console.log(newReservation)
+  console.log('Occupied tables = ' + (reservationList.length))
+  console.log('Waitlist tables = ' + (waitList.length))
 
-//     for (var i = 0; i < characters.length; i++) {
-//       if (chosen === characters[i].routeName) {
-//         return res.json(characters[i]);
-//       }
-//     }
-//     return res.json(false);
-//   }
-//   return res.json(characters);
-// });
+  if (reservationList.length < numberofTables ) {
+    reservationList.push(newReservation)
+    res.json(reserveSuccess)
 
-// // Create New Characters - takes in JSON input
-// app.post("/api/new", function (req, res) {
-//   // req.body hosts is equal to the JSON post sent from the user
-//   // This works because of our body-parser middleware
-//   var newcharacter = req.body;
-//   // Using a RegEx Pattern to remove spaces from newCharacter
-//   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-//   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
+    for (let index = 0; index < reservationList.length; index++) {
+      console.log('reservation List' + [index] + ': ' + reservationList[index].name + reservationList[index].uniqueID)
+    }
 
-//   console.log(newcharacter);
+    for (let index = 0; index < waitList.length; index++) {
+      console.log('wait List' + [index] + ': ' + waitList[index].name + waitList[index].uniqueID)
+    }
 
-//   characters.push(newcharacter);
+  } else {
+    waitList.push(newReservation)
+    res.json(reserveFailure)
+    for (let index = 0; index < reservationList.length; index++) {
+      console.log('reservation List' + [index] + ': ' + reservationList[index].name + reservationList[index].uniqueID)
+    }
+    for (let index = 0; index < waitList.length; index++) {
+      console.log('wait List' + [index] + ': ' + waitList[index].name + waitList[index].uniqueID)
+    }
+  }
+})
 
-//   res.json(newcharacter);
-// });
+app.post("/table#", function (req, res) {
+  reservationList = []
+  waitList = []
+})
 
 // Starts the server to begin listening
 // =============================================================
