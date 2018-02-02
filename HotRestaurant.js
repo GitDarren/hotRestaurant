@@ -9,26 +9,54 @@ var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// // Sets up the Express app to handle data parsing
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+var numberofTables = 5
 
-// // Routes
-// // =============================================================
+var reservationList = [
+  {
+    name: "Test",
+    Phone Number: "123-456-7890",
+    email: "test@test.com",
+    uniqueID: "ABC123"
+  }
+]
 
-// // Basic route that sends the user first to the AJAX Page
-// app.get("/", function (req, res) {
-//   res.sendFile(path.join(__dirname, "view.html"));
-// });
+var waitList = [
+  {
+    name: "Test",
+    Phone Number: "123-456-7890",
+    email: "test@test.com",
+    uniqueID: "ABC123"
+  }
+]
 
-// app.get("/add", function (req, res) {
-//   res.sendFile(path.join(__dirname, "add.html"));
-// });
 
-// // Get all characters
-// app.get("/all", function (req, res) {
-//   res.json(characters);
-// });
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Routes
+// =============================================================
+
+// Basic route that sends the user first to the AJAX Page
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "home.html"));
+});
+
+app.get("/table", function (req, res) {
+  res.sendFile(path.join(__dirname, "table.html"));
+});
+
+app.get("/reserve", function (req, res) {
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
+
+app.get("/api/tables", function (req, res) {
+  res.json(reservationList);
+});
+
+app.get("/api/waitlist", function (req, res) {
+  res.json(waitList);
+});
 
 // // Search for Specific Character (or all characters) - provides JSON
 // app.get("/api/:characters?", function (req, res) {
