@@ -95,9 +95,25 @@ $(".submit").on("click", function(e)	{
 	};
 
 	console.log(addedReservation);
+
+
+$.post("./api/new", addedReservation,
+	function(data)	{
+		console.log(data);
+		if(data == "Reservation")	{
+			alert("Badass, you now have a reservation");
+		}
+		if(data == "Waitlist")	{
+			alert("Unfortunately you are not cool enough to get a table so you're on the waitlist");
+		}
+	}
+)
+
+$('reserve_name').val("");
+$('reserve_phone').val("");
+$('reserve_email').val("");
+$('reserve_uniqueID').val("");
 });
-
-
 
 
 </script>
