@@ -1,62 +1,62 @@
 // Dependencies
 // =============================================================
-var express = require("express");
-var bodyParser = require("body-parser");
-var path = require("path");
+var express = require('express')
+var bodyParser = require('body-parser')
+var path = require('path')
 
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = process.env.PORT || 3000;
+var app = express()
+var PORT = process.env.PORT || 3000
 
 var numberofTables = 5
 
 var reservationList = [
   {
-    name: "Test",
-    phoneNumber: "123-456-7890",
-    email: "test@test.com",
-    uniqueID: "ABC123"
+    name: 'Test',
+    phoneNumber: '123-456-7890',
+    email: 'test@test.com',
+    uniqueID: 'ABC123'
   }
 ]
 
 var waitList = [
   {
-    name: "Test",
-    phoneNumber: "123-456-7890",
-    email: "test@test.com",
-    uniqueID: "ABC123"
+    name: 'Test',
+    phoneNumber: '123-456-7890',
+    email: 'test@test.com',
+    uniqueID: 'ABC123'
   }
 ]
-
-
 // Sets up the Express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+console.log(app)
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "home.html"));
-});
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'home.html'))
+})
 
-app.get("/table", function (req, res) {
-  res.sendFile(path.join(__dirname, "table.html"));
-});
+app.get('/table', function (req, res) {
+  res.sendFile(path.join(__dirname, 'table.html'))
+})
 
-app.get("/reserve", function (req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
-});
+app.get('/reserve', function (req, res) {
+  res.sendFile(path.join(__dirname, 'reserve.html'))
+})
 
-app.get("/api/tables", function (req, res) {
-  res.json(reservationList);
-});
+app.get('/api/tables', function (req, res) {
+  res.json(reservationList)
+})
 
-app.get("/api/waitlist", function (req, res) {
-  res.json(waitList);
-});
+app.get('/api/waitlist', function (req, res) {
+  res.json(waitList)
+})
 
 // // Search for Specific Character (or all characters) - provides JSON
 // app.get("/api/:characters?", function (req, res) {
@@ -94,5 +94,5 @@ app.get("/api/waitlist", function (req, res) {
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
-  console.log("App listening on PORT " + PORT);
-});
+  console.log('App listening on PORT ' + PORT)
+})
