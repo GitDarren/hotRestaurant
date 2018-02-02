@@ -90,9 +90,10 @@ app.post("/api/new", function (req, res) {
   }
 })
 
-app.post("/table#", function (req, res) {
+app.post("/table", function (req, res) {
   reservationList = []
   waitList = []
+  res.end('Success')
 })
 
 // Starts the server to begin listening
